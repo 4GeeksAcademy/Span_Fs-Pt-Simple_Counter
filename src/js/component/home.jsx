@@ -1,26 +1,19 @@
 import React from "react";
+import { Contador } from "./digit";
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
+export const Home = ({ counter }) => {
+  const formatDigits = (counter) => {
+    return String(counter).padStart(6, "0").split("").map(Number);
+  };
 
-//create your first component
-const Home = () => {
-	return (
-		<div className="text-center">
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
-		</div>
-	);
+  const digitsArray = formatDigits(counter);
+
+  return (
+    <div className="container d-flex justify-content-center align-items-center display-2">
+      <Contador digitos={<i className="fa-solid fa-clock"></i>} />
+      {digitsArray.map((digit, index) => (
+      <Contador key={index} digitos={digit} />
+      ))}
+    </div>
+  );
 };
-
-export default Home;
